@@ -1,0 +1,55 @@
+if game.PlaceId == 10723695195 then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("Priv Anime Evolution Simulator", "Midnight")
+
+    -- Main
+
+    local FarmTab = Window:NewTab("Farm")
+    local FarmSection = FarmTab:NewSection("Farm Clicks")
+
+    FarmSection:NewToggle("AutoFarm", "Auto Farm Clicks", function(state)
+        if state then
+            _G.loop = true
+            while _G.loop == true do wait()
+                print("Toggle on")
+    
+                local args = {
+                    [1] = {
+                        [1] = "PowerTrain"
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage").Remotes.Client:FireServer(unpack(args))
+            end
+        else
+            _G.loop = false
+            while _G.loop do wait()
+                print("Toggle off")
+    
+                local args = {
+                    [1] = {
+                        [1] = "PowerTrain"
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage").Remotes.Client:FireServer(unpack(args))
+            end
+        end
+    end)
+
+    local RankTab = Window:NewTab("Rank")
+    local RankSection = RankTab:NewSection("Rank")
+
+    RankSection:NewButton("RankUp", "Buy", function()
+
+        print("Clicked")
+        local args = {
+            [1] = {
+                [1] = "RankUp"
+            }
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Client:FireServer(unpack(args))
+    end)
+
+end
